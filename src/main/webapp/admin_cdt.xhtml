@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ReyesWebUD - Listado CDTs</title>
+    <h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+<h:body>
+    <div class="contenedor">
+        <h1 class="titulo-pagina">CDTs Registrados</h1>
+        <hr class="separador" />
+
+        <div class="nav-links">
+            <a href="index.xhtml" class="btn-nav">Inicio</a>
+            <a href="cdt.xhtml" class="btn-nav">Registrar CDT</a>
+        </div>
+
+        <h:panelGroup rendered="#{not empty cdtBean.listaCdt}">
+            <h:dataTable value="#{cdtBean.listaCdt}" var="c" styleClass="tabla-datos">
+                <h:column><f:facet name="header">No.</f:facet>
+                    <h:outputText value="#{cdtBean.listaCdt.indexOf(c) + 1}" /></h:column>
+                <h:column><f:facet name="header">Identificación</f:facet>
+                    <h:outputText value="#{c.id_p}" /></h:column>
+                <h:column><f:facet name="header">Nombres</f:facet>
+                    <h:outputText value="#{c.nombres}" /></h:column>
+                <h:column><f:facet name="header">Apellidos</f:facet>
+                    <h:outputText value="#{c.apellidos}" /></h:column>
+                <h:column><f:facet name="header">Correo</f:facet>
+                    <h:outputText value="#{c.correo}" /></h:column>
+                <h:column><f:facet name="header">Teléfono</f:facet>
+                    <h:outputText value="#{c.telefono}" /></h:column>
+                <h:column><f:facet name="header">Tipo CDT</f:facet>
+                    <h:outputText value="#{c.tipo_cdt.nombre_tipo}" /></h:column>
+                <h:column><f:facet name="header">Inversión ($)</f:facet>
+                    <h:outputText value="#{c.inversion}">
+                        <f:convertNumber type="currency" currencySymbol="$" groupingUsed="true" minFractionDigits="2" />
+                    </h:outputText></h:column>
+                <h:column><f:facet name="header">Tasa E.A.</f:facet>
+                    <h:outputText value="#{c.interes * 100}">
+                        <f:convertNumber maxFractionDigits="1" />
+                    </h:outputText> %</h:column>
+                <h:column><f:facet name="header">Plazo (días)</f:facet>
+                    <h:outputText value="#{c.plazo}" /></h:column>
+                <h:column><f:facet name="header">Ganancia ($)</f:facet>
+                    <h:outputText value="#{c.ganancia}">
+                        <f:convertNumber type="currency" currencySymbol="$" groupingUsed="true" minFractionDigits="2" />
+                    </h:outputText></h:column>
+                <h:column><f:facet name="header">Valor Futuro ($)</f:facet>
+                    <h:outputText value="#{c.valorFuturo}">
+                        <f:convertNumber type="currency" currencySymbol="$" groupingUsed="true" minFractionDigits="2" />
+                    </h:outputText></h:column>
+                <h:column><f:facet name="header">Impuesto ($)</f:facet>
+                    <h:outputText value="#{c.impuesto}">
+                        <f:convertNumber type="currency" currencySymbol="$" groupingUsed="true" minFractionDigits="2" />
+                    </h:outputText></h:column>
+                <h:column><f:facet name="header">Fecha Registro</f:facet>
+                    <h:outputText value="#{c.fecha_reg}" /></h:column>
+            </h:dataTable>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{empty cdtBean.listaCdt}">
+            <p class="sin-registros">No hay CDTs registrados aún.</p>
+        </h:panelGroup>
+
+        <footer class="pie">
+            Gabriela Reyes Luna &#160;|&#160; Programación Avanzada &#160;|&#160; Grupo 302<br/>
+            Universidad Distrital Francisco José de Caldas &#160;|&#160; 2026
+        </footer>
+    </div>
+</h:body>
+</html>

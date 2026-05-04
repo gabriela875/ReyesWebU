@@ -5,24 +5,26 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>ReyesWebUD - Registro de Aspirante</title>
+    <title>ReyesWebUD - Registro CDT</title>
     <h:outputStylesheet library="css" name="estilos.css" />
 </h:head>
 <h:body>
     <div class="contenedor">
-        <h1 class="titulo-pagina">Registro de Aspirante</h1>
+        <h1 class="titulo-pagina">Registro de CDT</h1>
         <hr class="separador" />
 
         <div class="nav-links">
             <a href="index.xhtml" class="btn-nav">Inicio</a>
-            <a href="admin_aspirante.xhtml" class="btn-nav">Ver Listado</a>
+            <a href="admin_cdt.xhtml" class="btn-nav">Ver Listado</a>
         </div>
 
         <h:form styleClass="formulario">
 
+            <h2 class="subtitulo">Datos del Titular</h2>
+
             <div class="fila-campo">
                 <h:outputLabel for="id_p" value="No. de Identificación:" />
-                <h:inputText id="id_p" value="#{asp.dto.id_p}" required="true"
+                <h:inputText id="id_p" value="#{cdtBean.dto.id_p}" required="true"
                              requiredMessage="La identificación es obligatoria."
                              validatorMessage="Ingrese un número válido.">
                     <f:validateLongRange minimum="1" />
@@ -32,7 +34,7 @@
 
             <div class="fila-campo">
                 <h:outputLabel for="nombres" value="Nombres:" />
-                <h:inputText id="nombres" value="#{asp.dto.nombres}" required="true"
+                <h:inputText id="nombres" value="#{cdtBean.dto.nombres}" required="true"
                              requiredMessage="Los nombres son obligatorios."
                              validatorMessage="Entre 2 y 60 caracteres.">
                     <f:validateLength minimum="2" maximum="60" />
@@ -43,7 +45,7 @@
 
             <div class="fila-campo">
                 <h:outputLabel for="apellidos" value="Apellidos:" />
-                <h:inputText id="apellidos" value="#{asp.dto.apellidos}" required="true"
+                <h:inputText id="apellidos" value="#{cdtBean.dto.apellidos}" required="true"
                              requiredMessage="Los apellidos son obligatorios."
                              validatorMessage="Entre 2 y 60 caracteres.">
                     <f:validateLength minimum="2" maximum="60" />
@@ -54,7 +56,7 @@
 
             <div class="fila-campo">
                 <h:outputLabel for="correo" value="Correo Electrónico:" />
-                <h:inputText id="correo" value="#{asp.dto.correo}" required="true"
+                <h:inputText id="correo" value="#{cdtBean.dto.correo}" required="true"
                              requiredMessage="El correo es obligatorio."
                              validatorMessage="Ingrese un correo válido.">
                     <f:validateRegex pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
@@ -65,7 +67,7 @@
 
             <div class="fila-campo">
                 <h:outputLabel for="telefono" value="Teléfono:" />
-                <h:inputText id="telefono" value="#{asp.dto.telefono}" required="true"
+                <h:inputText id="telefono" value="#{cdtBean.dto.telefono}" required="true"
                              requiredMessage="El teléfono es obligatorio."
                              validatorMessage="Entre 7 y 15 caracteres.">
                     <f:validateLength minimum="7" maximum="15" />
@@ -73,24 +75,56 @@
                 <h:message for="telefono" styleClass="error-msg" />
             </div>
 
+            <h2 class="subtitulo">Datos del CDT</h2>
+
             <div class="fila-campo">
-                <h:outputLabel for="pro_aca" value="Programa Académico:" />
-                <h:selectOneMenu id="pro_aca" value="#{asp.dto.pro_acad.cod}" required="true"
-                                 requiredMessage="Seleccione un programa académico.">
-                    <f:selectItem itemValue="-1" itemLabel="-- Seleccione un programa --" noSelectionOption="true" />
-                    <f:selectItems value="#{asp.listaPa}" var="p"
-                                   itemValue="#{asp.listaPa.indexOf(p)}"
-                                   itemLabel="#{p.nombre_prog}" />
+                <h:outputLabel for="tipo_cdt" value="Tipo de CDT:" />
+                <h:selectOneMenu id="tipo_cdt" value="#{cdtBean.dto.tipo_cdt.cod}" required="true"
+                                 requiredMessage="Seleccione un tipo de CDT.">
+                    <f:selectItem itemValue="-1" itemLabel="-- Seleccione un tipo --" noSelectionOption="true" />
+                    <f:selectItems value="#{cdtBean.listaTipo}" var="t"
+                                   itemValue="#{cdtBean.listaTipo.indexOf(t)}"
+                                   itemLabel="#{t.nombre_tipo}" />
                 </h:selectOneMenu>
-                <h:message for="pro_aca" styleClass="error-msg" />
+                <h:message for="tipo_cdt" styleClass="error-msg" />
             </div>
 
-            <h:commandButton value="Registrar Aspirante" action="#{asp.registrar}" styleClass="btn-registrar">
+            <div class="fila-campo">
+                <h:outputLabel for="inversion" value="Monto a Invertir (COP $):" />
+                <h:inputText id="inversion" value="#{cdtBean.dto.inversion}" required="true"
+                             requiredMessage="El monto es obligatorio."
+                             converterMessage="Ingrese un valor numérico (ej: 5000000).">
+                    <f:validateDoubleRange minimum="1" />
+                </h:inputText>
+                <h:message for="inversion" styleClass="error-msg" />
+            </div>
+
+            <div class="fila-campo">
+                <h:outputLabel for="interes" value="Tasa de Interés E.A. (decimal, ej: 0.08 para 8%):" />
+                <h:inputText id="interes" value="#{cdtBean.dto.interes}" required="true"
+                             requiredMessage="La tasa de interés es obligatoria."
+                             converterMessage="Ingrese un decimal (ej: 0.08).">
+                    <f:validateDoubleRange minimum="0.001" maximum="1.0" />
+                </h:inputText>
+                <h:message for="interes" styleClass="error-msg" />
+            </div>
+
+            <div class="fila-campo">
+                <h:outputLabel for="plazo" value="Plazo (días):" />
+                <h:inputText id="plazo" value="#{cdtBean.dto.plazo}" required="true"
+                             requiredMessage="El plazo es obligatorio."
+                             converterMessage="Ingrese un número de días (ej: 180).">
+                    <f:validateDoubleRange minimum="1" maximum="1800" />
+                </h:inputText>
+                <h:message for="plazo" styleClass="error-msg" />
+            </div>
+
+            <h:commandButton value="Registrar CDT" action="#{cdtBean.registrar}" styleClass="btn-registrar">
                 <f:ajax execute="@form" render="@form" />
             </h:commandButton>
 
-            <h:panelGroup rendered="#{not empty asp.mensaje}">
-                <p class="mensaje-ok">#{asp.mensaje}</p>
+            <h:panelGroup rendered="#{not empty cdtBean.mensaje}">
+                <p class="mensaje-ok">#{cdtBean.mensaje}</p>
             </h:panelGroup>
 
         </h:form>
