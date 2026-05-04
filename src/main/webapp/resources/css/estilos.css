@@ -1,0 +1,216 @@
+
+/* ---- Variables de color ---- */
+:root {
+    --rosa-claro: #f9e4ef;
+    --rosa-medio: #e8a0bf;
+    --rosa-oscuro: #c2547a;
+    --rosa-header: #d4678a;
+    --rosa-titulo: #b5476b;
+    --texto-oscuro: #4a2035;
+    --blanco: #ffffff;
+    --borde: #e8c0d0;
+    --fondo-fila-par: #fdf0f6;
+}
+
+/* ---- Body y fondo general ---- */
+body {
+    background-color: var(--rosa-claro);
+    font-family: 'Georgia', serif;
+    color: var(--texto-oscuro);
+    margin: 0;
+    padding: 0;
+}
+
+/* ---- Contenedor principal ---- */
+.contenedor {
+    max-width: 860px;
+    margin: 40px auto;
+    background-color: var(--blanco);
+    border-radius: 12px;
+    padding: 40px 50px;
+    box-shadow: 0 2px 16px rgba(180, 80, 110, 0.10);
+    border: 1px solid var(--borde);
+}
+
+/* ---- Titulo principal ---- */
+h1.titulo-pagina {
+    text-align: center;
+    color: var(--rosa-titulo);
+    font-size: 2.2rem;
+    font-weight: normal;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+/* ---- Linea separadora bajo el titulo ---- */
+.separador {
+    border: none;
+    border-top: 1.5px solid var(--rosa-medio);
+    margin: 0 auto 28px auto;
+    width: 80%;
+}
+
+/* ---- Subtitulos de seccion ---- */
+h2.subtitulo {
+    text-align: center;
+    color: var(--rosa-titulo);
+    font-size: 1.3rem;
+    font-weight: normal;
+    margin-bottom: 16px;
+}
+
+/* ---- Formulario ---- */
+.formulario {
+    width: 100%;
+}
+
+.fila-campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.fila-campo label {
+    font-size: 0.95rem;
+    color: var(--texto-oscuro);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Inputs de texto y select */
+.fila-campo input,
+.fila-campo select {
+    padding: 9px 13px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: 'Georgia', serif;
+    background-color: #fff;
+    color: var(--texto-oscuro);
+    transition: border-color 0.2s;
+}
+
+.fila-campo input:focus,
+.fila-campo select:focus {
+    outline: none;
+    border-color: var(--rosa-oscuro);
+    box-shadow: 0 0 0 2px rgba(194, 84, 122, 0.12);
+}
+
+/* Mensajes de error de validacion JSF */
+.error-msg {
+    color: #c0392b;
+    font-size: 0.82rem;
+    margin-top: 3px;
+}
+
+/* ---- Boton registrar ---- */
+.btn-registrar {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background-color: var(--rosa-oscuro);
+    color: var(--blanco);
+    border: none;
+    border-radius: 7px;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
+    cursor: pointer;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s;
+}
+
+.btn-registrar:hover {
+    background-color: var(--rosa-titulo);
+}
+
+/* ---- Mensaje de confirmacion/error general ---- */
+.mensaje-ok {
+    text-align: center;
+    color: var(--rosa-oscuro);
+    font-size: 0.97rem;
+    margin-top: 14px;
+    font-style: italic;
+}
+
+/* ---- Tabla de aspirantes (vista admin) ---- */
+.tabla-aspirantes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.93rem;
+}
+
+/* Encabezado de la tabla */
+.tabla-aspirantes thead tr {
+    background-color: var(--rosa-header);
+    color: var(--blanco);
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+}
+
+.tabla-aspirantes thead th {
+    padding: 11px 14px;
+    text-align: left;
+    border: 1px solid var(--rosa-oscuro);
+}
+
+/* Filas del cuerpo de la tabla */
+.tabla-aspirantes tbody tr:nth-child(even) {
+    background-color: var(--fondo-fila-par);
+}
+
+.tabla-aspirantes tbody tr:nth-child(odd) {
+    background-color: var(--blanco);
+}
+
+.tabla-aspirantes tbody td {
+    padding: 10px 14px;
+    border: 1px solid var(--borde);
+    color: var(--texto-oscuro);
+}
+
+/* Sin registros */
+.sin-registros {
+    text-align: center;
+    color: var(--rosa-oscuro);
+    font-style: italic;
+    padding: 18px;
+}
+
+/* ---- Botones de navegacion ---- */
+.btn-nav {
+    display: inline-block;
+    padding: 8px 22px;
+    background-color: var(--blanco);
+    color: var(--rosa-oscuro);
+    border: 1.5px solid var(--rosa-oscuro);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: 'Georgia', serif;
+    text-decoration: none;
+    margin: 6px 4px;
+    transition: all 0.2s;
+}
+
+.btn-nav:hover {
+    background-color: var(--rosa-claro);
+}
+
+.nav-links {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* ---- Footer ---- */
+footer.pie {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--borde);
+    color: var(--rosa-oscuro);
+    font-size: 0.85rem;
+    line-height: 1.7;
+}

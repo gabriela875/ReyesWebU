@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ReyesWebUD - Registro de Aspirante</title>
+    <h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+
+<h:body>
+    <div class="contenedor">
+
+        <h1 class="titulo-pagina">Registro de Aspirante</h1>
+        <hr class="separador" />
+
+        <div class="nav-links">
+            <a href="index.xhtml" class="btn-nav">Inicio</a>
+            <a href="admin.xhtml" class="btn-nav">Ver Listado</a>
+        </div>
+
+        <h:form styleClass="formulario">
+
+            <div class="fila-campo">
+                <h:outputLabel for="id_p" value="No. de Identificación:" />
+                <h:inputText id="id_p" value="#{asp.dto.id_p}"
+                             required="true"
+                             requiredMessage="La identificación es obligatoria."
+                             validatorMessage="Ingrese un número de identificación válido.">
+                    <f:validateLongRange minimum="1" />
+                </h:inputText>
+                <h:message for="id_p" styleClass="error-msg" />
+            </div>
+
+
+            <div class="fila-campo">
+                <h:outputLabel for="nombres" value="Nombres:" />
+                <h:inputText id="nombres" value="#{asp.dto.nombres}"
+                             required="true"
+                             requiredMessage="Los nombres son obligatorios."
+                             validatorMessage="Los nombres deben tener entre 2 y 60 caracteres.">
+                    <f:validateLength minimum="2" maximum="60" />
+                    <f:validateRegex pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$" />
+                </h:inputText>
+                <h:message for="nombres" styleClass="error-msg" />
+            </div>
+
+
+            <div class="fila-campo">
+                <h:outputLabel for="apellidos" value="Apellidos:" />
+                <h:inputText id="apellidos" value="#{asp.dto.apellidos}"
+                             required="true"
+                             requiredMessage="Los apellidos son obligatorios."
+                             validatorMessage="Los apellidos deben tener entre 2 y 60 caracteres.">
+                    <f:validateLength minimum="2" maximum="60" />
+                    <f:validateRegex pattern="^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$" />
+                </h:inputText>
+                <h:message for="apellidos" styleClass="error-msg" />
+            </div>
+
+
+            <div class="fila-campo">
+                <h:outputLabel for="correo" value="Correo Electrónico:" />
+                <h:inputText id="correo" value="#{asp.dto.correo}"
+                             required="true"
+                             requiredMessage="El correo es obligatorio."
+                             validatorMessage="El correo debe tener entre 6 y 80 caracteres.">
+                    <f:validateRegex pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+                    <f:validateLength minimum="6" maximum="80" />
+                </h:inputText>
+                <h:message for="correo" styleClass="error-msg" />
+            </div>
+
+
+            <div class="fila-campo">
+                <h:outputLabel for="telefono" value="Teléfono:" />
+                <h:inputText id="telefono" value="#{asp.dto.telefono}"
+                             required="true"
+                             requiredMessage="El teléfono es obligatorio."
+                             validatorMessage="El teléfono debe tener entre 7 y 15 caracteres.">
+                    <f:validateLength minimum="7" maximum="15" />
+                </h:inputText>
+                <h:message for="telefono" styleClass="error-msg" />
+            </div>
+
+
+            <div class="fila-campo">
+                <h:outputLabel for="pro_aca" value="Programa Académico:" />
+                <h:selectOneMenu id="pro_aca" value="#{asp.dto.pro_acad.cod}"
+                                 required="true"
+                                 requiredMessage="Seleccione un programa académico.">
+                    <f:selectItem itemValue="-1" itemLabel="-- Seleccione un programa --"
+                                  noSelectionOption="true" />
+                    <f:selectItems value="#{asp.listaPa}" var="p"
+                                   itemValue="#{asp.listaPa.indexOf(p)}"
+                                   itemLabel="#{p.nombre_prog}" />
+                </h:selectOneMenu>
+                <h:message for="pro_aca" styleClass="error-msg" />
+            </div>
+
+            <h:commandButton value="Registrar Aspirante" action="#{asp.registrar}" styleClass="btn-registrar">
+                <f:ajax execute="@form" render="@form" />
+            </h:commandButton>
+
+            <h:panelGroup rendered="#{not empty asp.mensaje}">
+                <p class="mensaje-ok">#{asp.mensaje}</p>
+            </h:panelGroup>
+
+        </h:form>
+
+        <footer class="pie">
+            Gabriela Reyes Luna &nbsp;|&nbsp; Programación Avanzada &nbsp;|&nbsp; Grupo 302<br/>
+            Universidad Distrital Francisco José de Caldas &nbsp;|&nbsp; 2026
+        </footer>
+    </div>
+</h:body>
+</html>

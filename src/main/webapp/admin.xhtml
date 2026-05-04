@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ReyesWebUD - Vista Administrador</title>
+    <h:outputStylesheet library="css" name="estilos.css" />
+</h:head>
+
+<h:body>
+    <div class="contenedor">
+
+        <h1 class="titulo-pagina">Vista Administrador</h1>
+        <hr class="separador" />
+
+        <div class="nav-links">
+            <a href="index.xhtml" class="btn-nav">Inicio</a>
+            <a href="aspirante.xhtml" class="btn-nav">Registrar Aspirante</a>
+        </div>
+
+        <h2 class="subtitulo">Aspirantes Registrados</h2>
+
+        <h:panelGroup rendered="#{not empty asp.listaAs}">
+            <h:dataTable value="#{asp.listaAs}" var="a" styleClass="tabla-aspirantes">
+
+                <h:column>
+                    <f:facet name="header">No.</f:facet>
+                    <h:outputText value="#{asp.listaAs.indexOf(a) + 1}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Identificación</f:facet>
+                    <h:outputText value="#{a.id_p}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Nombres</f:facet>
+                    <h:outputText value="#{a.nombres}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Apellidos</f:facet>
+                    <h:outputText value="#{a.apellidos}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Correo</f:facet>
+                    <h:outputText value="#{a.correo}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Teléfono</f:facet>
+                    <h:outputText value="#{a.telefono}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Programa Académico</f:facet>
+                    <h:outputText value="#{a.pro_acad.nombre_prog}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Fecha Registro</f:facet>
+                    <h:outputText value="#{a.fecha_reg}" />
+                </h:column>
+
+            </h:dataTable>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{empty asp.listaAs}">
+            <p class="sin-registros">No hay aspirantes registrados aún.</p>
+        </h:panelGroup>
+
+        <footer class="pie">
+            Gabriela Reyes Luna &nbsp;|&nbsp; Programación Avanzada &nbsp;|&nbsp; Grupo 302<br/>
+            Universidad Distrital Francisco José de Caldas &nbsp;|&nbsp; 2026
+        </footer>
+    </div>
+</h:body>
+</html>
